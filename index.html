@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Buzzers</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script language="Javascript" type="text/javascript">
+            $(document).ready(function(){
+                startTime();
+            });
+
+            monthDay = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+            todayDate = new Array();
+            lastBroke = new Array (12, 18, 2021);
+
+            function getDays(){
+                days = 0;
+                if(todayDate[2] > lastBroke[2]){
+                    for(var i = 0; i<monthDay.length; i++){
+                        if((i+1)>lastBroke[0] || (i+1) < todayDate[0]){
+                            days += monthDay[i];
+                        }
+                    }
+                    days += (todayDate[1] + ((monthDay[lastBroke[0]-1]) - lastBroke[1]));
+                } else {
+                    for(var i = 0; i<monthDay.length; i++){
+                        if((i+1)>lastBroke[0] && (i+1) < todayDate[0]){
+                            days += monthDay[i];
+                        }
+                    }
+                    days += (todayDate[1] - lastBroke[1]);
+                }
+
+                document.getElementById('days').innerHTML = "<h2> " + days + " </h2>";
+                var timer = setTimeout(getDays, 500);
+            }
+
+            dayName = new Array ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+            monName = new Array ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec");
+            now = new Date();
+            function checkTime(i) {
+                if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+                return i;
+              }
+            function startTime() {
+          	          var today = new Date();
+          	          var h = today.getHours();
+          	          var m = today.getMinutes();
+          	          var s = today.getSeconds();
+          	          m = checkTime(m);
+          	          s = checkTime(s);
+          	          document.getElementById('txt').innerHTML =
+                              "<h3>"+
+                              dayName[now.getDay()]+ ", "+
+                              monName[now.getMonth()] + ". " +
+                              now.getDate()  + " " + (now.getYear()+1900)+" "+"<br>"+"<span id = 'time'>"+
+                              h + ":" + m +"."+ s+"</span>"
+
+          	          todayDate = new Array (now.getMonth()+1, now.getDate(), now.getYear()+1900);
+          	          getDays();
+          	          var t = setTimeout(startTime, 500);
+                    }
+        </script>
+    </head>
+    <body>
+    <div id = "txt"></div>
+    <h1>Days Since Last Destroyed Buzzer: </h1>
+    <div id = "days"></div>
+
+    </body>
+</html>
