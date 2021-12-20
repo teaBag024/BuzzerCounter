@@ -1,0 +1,63 @@
+html{
+    background: #333;
+    color: #FFF;
+}
+
+#container{
+    width: 40%;
+    margin: auto;
+}
+
+div#right{
+    width: 49%;
+    display: inline-block;
+
+}div#left{
+    width: 49%;
+    display: inline-block;
+}
+h1{
+    width: 90%;
+    text-align: center;
+}
+span, div.count{
+    font-size: 5vh;
+}
+#days,#buzzers{
+    color: red;
+    text-align: center;
+
+    background: #222;
+    border-radius: 10px;
+}
+
+div#txt{
+    background: #222;
+
+    padding: 1.5vh 1.5vw;
+
+    position: absolute;
+    right: 3vw;
+    bottom: 3vh;
+
+    border-radius: 10px;
+}
+
+
+
+table{
+    width: 100%;
+}
+th{
+    padding: 3vh;
+    font-size: 20px;
+}
+td:nth-child(1){
+    width: 30%;
+    border-right: 1px solid #FFF;
+    color: red;
+    font-size: 25px;
+}
+td{
+    text-align: center;
+}

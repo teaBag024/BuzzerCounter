@@ -5,12 +5,14 @@
 
         <script language="Javascript" type="text/javascript">
             $(document).ready(function(){
+                getLastBroke();
+                numberOfBrokenBuzzers();
                 startTime();
             });
 
             monthDay = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
             todayDate = new Array();
-            lastBroke = new Array (12, 18, 2021);
+            lastBroke = new Array (0, 0, 0);
 
             function getDays(){
                 days = 0;
@@ -30,8 +32,24 @@
                     days += (todayDate[1] - lastBroke[1]);
                 }
 
-                document.getElementById('days').innerHTML = "<h2> " + days + " </h2>";
+                document.getElementById('days').innerHTML = "" + days;
                 var timer = setTimeout(getDays, 500);
+            }
+            function getLastBroke(){
+                var table = document.getElementById("table");
+                var row = table.rows[table.rows.length - 1];
+                lastBroke = new Array (
+                    parseInt(row.cells[1].innerHTML),
+                    parseInt(row.cells[2].innerHTML),
+                    parseInt(row.cells[3].innerHTML));
+            }
+            function numberOfBrokenBuzzers(){
+                var table = document.getElementById("table");
+                var num = 0;
+                for (var i = 1; i<table.rows.length; i++){
+                    num += parseInt(table.rows[i].cells[0].innerHTML);
+                }
+                document.getElementById("buzzers").innerHTML = String(num);
             }
 
             dayName = new Array ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
@@ -60,11 +78,46 @@
           	          var t = setTimeout(startTime, 500);
                     }
         </script>
+
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-    <div id = "txt"></div>
-    <h1>Days Since Last Destroyed Buzzer: </h1>
-    <div id = "days"></div>
+        "Sounds like a you problem, probably is a you problem" - a friend
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id = "container">
+        <div id = "right">
+            <h1>Days Since Last Destroyed Buzzer:</h1>
+            <div id = "days" class = "count"></div>
+        </div>
+        <div id = "left">
+            <h1>Number Of Buzzers Broken: </h1>
+            <div id = "buzzers" class = "count"></div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <table id = "table">
+            <tr>
+                <th>#</th>
+                <th>Month</th>
+                <th>Day</th>
+                <th>Year</th>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>12</td>
+                <td>18</td>
+                <td>2021</td>
+            </tr>
+        </table>
+    </div>
 
+
+
+    <div id = "txt"></div>
     </body>
 </html>
